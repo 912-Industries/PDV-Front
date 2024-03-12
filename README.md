@@ -1,7 +1,5 @@
-<<<<<<< HEAD
+
 # PDV-Front
-=======
-# pdv_front
 
 A new Flutter project.
 
