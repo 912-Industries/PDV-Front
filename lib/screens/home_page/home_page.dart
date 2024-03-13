@@ -16,7 +16,11 @@ class _HomePageState extends State<HomePage> {
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Row(
-          children: const [ListagemProduto(), Spacer(), ListagemPrecoProduto()],
+          children: const [
+            ListagemProduto(),
+            Spacer(),
+            ListagemPrecoProduto(),
+          ],
         ),
       ),
     );
