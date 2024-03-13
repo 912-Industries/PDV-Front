@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pdv_front/screens/home_page/widgets/keyboard_buffer.dart';
 import 'package:pdv_front/screens/home_page/widgets/listagem_preco_produto.dart';
 import 'package:pdv_front/screens/home_page/widgets/listagem_produto.dart';
 
@@ -18,6 +19,7 @@ class _HomePageState extends State<HomePage> {
         child: Row(
           children: const [
             ListagemProduto(),
+            KeyboardBuffer(),
             Spacer(),
             ListagemPrecoProduto(),
           ],
