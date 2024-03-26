@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pdv_front/screens/home_page/widgets/keyboard_buffer.dart';
-import 'package:pdv_front/screens/home_page/widgets/listagem_preco_produto.dart';
-import 'package:pdv_front/screens/home_page/widgets/listagem_produto.dart';
+import 'package:pdv_front/screens/home_page/widgets/listagem_preco_produto/listagem_preco_produto.dart';
+import 'package:pdv_front/screens/home_page/widgets/listagem_preco_produto/listagem_produto.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,11 +13,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
         child: Row(
-          children: const [
+          children: [
             ListagemProduto(),
             KeyboardBuffer(),
             Spacer(),

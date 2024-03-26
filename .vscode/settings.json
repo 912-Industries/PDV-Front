@@ -1,3 +1,6 @@
 {
-    "C_Cpp.errorSquiggles": "enabled"
+    "C_Cpp.errorSquiggles": "enabled",
+    "java.project.sourcePaths": [
+        "lib/screens/home_page/widgets/listagem_preco_produto"
+    ]
 }

@@ -26,7 +26,7 @@ class _KeyboardBufferState extends State<KeyboardBuffer> {
           print('Tecla pressionada: ${event.logicalKey}');
         }
       },
-      child: const Spacer(),
+      child: const Text(''),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pdv_front/screens/home_page/widgets/listagem_preco_produto/utils/card.dart';
 
 class ListagemProduto extends StatefulWidget {
   const ListagemProduto({super.key});
@@ -15,17 +16,15 @@ class _ListagemProdutoState extends State<ListagemProduto> {
       height: MediaQuery.of(context).size.width * 0.6,
       decoration: BoxDecoration(
           border: Border.all(
-        width: 5,
-        color: Colors.blue,
-      )),
+            width: 2,
+            color: Colors.black,
+          ),
+          borderRadius: BorderRadius.circular(20)),
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          Container(
-            width: MediaQuery.of(context).size.width * 1,
-            height: MediaQuery.of(context).size.height * 0.1,
-            decoration:
-                BoxDecoration(border: Border.all(width: 5, color: Colors.red)),
+          const CardListagemProduto(
+            descricaoProduto: 'teste',
           ),
           Padding(
             padding: const EdgeInsets.only(top: 15),
