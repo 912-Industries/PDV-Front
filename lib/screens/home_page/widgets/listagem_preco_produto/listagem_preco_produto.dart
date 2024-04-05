@@ -23,7 +23,7 @@ class _ListagemPrecoProdutoState extends State<ListagemPrecoProduto> {
               width: MediaQuery.of(context).size.width * 0.36,
               height: MediaQuery.of(context).size.height * 0.65,
               decoration: BoxDecoration(
-                  border: Border.all(width: 5, color: Colors.red)),
+                  border: Border.all(width: 5, color: Colors.black)),
             ),
             const Spacer(),
             Padding(

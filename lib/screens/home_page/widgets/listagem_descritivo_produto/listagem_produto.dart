@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pdv_front/screens/home_page/widgets/listagem_preco_produto/card_descritivo_produto.dart';
-import 'package:pdv_front/screens/home_page/widgets/listagem_preco_produto/utils/card.dart';
+import 'package:pdv_front/screens/home_page/widgets/listagem_descritivo_produto/card_descritivo_produto.dart';
+import 'package:pdv_front/screens/home_page/widgets/listagem_descritivo_produto/utils/card.dart';
 
 class ListagemProduto extends StatefulWidget {
   const ListagemProduto({super.key});
