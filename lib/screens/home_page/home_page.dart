@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pdv_front/screens/home_page/widgets/keyboard_buffer.dart';
+import 'package:pdv_front/screens/home_page/widgets/listagem_descritivo_produto/listagem_produto.dart';
 import 'package:pdv_front/screens/home_page/widgets/listagem_preco_produto/listagem_preco_produto.dart';
-import 'package:pdv_front/screens/home_page/widgets/listagem_preco_produto/listagem_produto.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
