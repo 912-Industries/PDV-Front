@@ -6,18 +6,29 @@ class CardListagemPreco extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(15),
       width: MediaQuery.of(context).size.width * 1,
-      height: 75,
+      height: 105,
       decoration: BoxDecoration(
           border: Border.all(color: Colors.black, width: 2),
-          borderRadius: BorderRadius.circular(5)) ,
-          child:  const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(children: [Text('teste'),],),
-          ],
+          borderRadius: BorderRadius.circular(20)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            children: [
+              RichText(
+                text: const TextSpan(
+                  text: "teste\n",
+                  style: TextStyle(color: Colors.black, fontSize: 16),
+                  children: <TextSpan>[TextSpan(text: 'testw')],
+                ),
+              ),
+            ],
           ),
+        ],
+      ),
     );
   }
 }

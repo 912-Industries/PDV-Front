@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pdv_front/screens/home_page/widgets/listagem_preco_produto/card_listagem_preco_produto.dart';
+import 'package:pdv_front/screens/home_page/widgets/listagem_preco_produto/card_preco_total.dart';
 
 class ListagemPrecoProduto extends StatefulWidget {
   const ListagemPrecoProduto({super.key});
@@ -13,27 +15,18 @@ class _ListagemPrecoProdutoState extends State<ListagemPrecoProduto> {
     return Container(
       width: MediaQuery.of(context).size.width * 0.36,
       height: MediaQuery.of(context).size.height * 1,
-      decoration:
-          BoxDecoration(border: Border.all(width: 5, color: Colors.blue)),
-      child: Padding(
-        padding: const EdgeInsets.all(15.0),
+      decoration: BoxDecoration(
+          border: Border.all(width: 2, color: Colors.black),
+          borderRadius: BorderRadius.circular(20)),
+      child: const Padding(
+        padding: EdgeInsets.all(15.0),
         child: Column(
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width * 0.36,
-              height: MediaQuery.of(context).size.height * 0.65,
-              decoration: BoxDecoration(
-                  border: Border.all(width: 5, color: Colors.black)),
-            ),
-            const Spacer(),
+          children: <Widget>[
+            CardListagemPreco(),
+            Spacer(),
             Padding(
-              padding: const EdgeInsets.only(top: 5.0),
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.36,
-                height: MediaQuery.of(context).size.height * 0.2,
-                decoration: BoxDecoration(
-                    border: Border.all(width: 5, color: Colors.purple)),
-              ),
+              padding: EdgeInsets.only(top: 5.0),
+              child: CardPrecoTotal(),
             ),
           ],
         ),
