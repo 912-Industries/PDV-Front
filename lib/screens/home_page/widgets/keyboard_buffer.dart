@@ -2,19 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class KeyboardBuffer extends StatefulWidget {
-  const KeyboardBuffer({super.key});
+  const KeyboardBuffer({Key? key}) : super(key: key);
 
   @override
   State<KeyboardBuffer> createState() => _KeyboardBufferState();
 }
 
-FocusNode _focusNode = FocusNode();
-
 class _KeyboardBufferState extends State<KeyboardBuffer> {
+  final FocusNode _focusNode = FocusNode();
+
   @override
   void initState() {
     super.initState();
-    _focusNode.requestFocus(); // Solicita o foco para o widget
+    _focusNode.requestFocus(); // Requests focus for the widget
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -23,7 +29,10 @@ class _KeyboardBufferState extends State<KeyboardBuffer> {
       focusNode: _focusNode,
       onKey: (RawKeyEvent event) {
         if (event is RawKeyDownEvent) {
-          print('Tecla pressionada: ${event.logicalKey}');
+          if (event.isControlPressed &&
+              event.logicalKey == LogicalKeyboardKey.keyD) {
+            print('Ctrl+D was pressed');
+          }
         }
       },
       child: const Text(''),
