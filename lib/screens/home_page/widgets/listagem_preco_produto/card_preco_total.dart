@@ -38,7 +38,7 @@ class _CardPrecoTotalState extends State<CardPrecoTotal> {
             child: Align(
               alignment: Alignment.bottomRight,
               child: Text(
-                "Price",
+                "10,99",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,

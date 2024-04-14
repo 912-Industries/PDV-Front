@@ -20,9 +20,9 @@ class CardListagemPreco extends StatelessWidget {
             children: [
               RichText(
                 text: const TextSpan(
-                  text: "teste\n",
+                  text: "Coca-Cola 1L\n",
                   style: TextStyle(color: Colors.black, fontSize: 16),
-                  children: <TextSpan>[TextSpan(text: 'testw')],
+                  children: <TextSpan>[TextSpan(text: '10,99')],
                 ),
               ),
             ],

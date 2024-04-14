@@ -25,14 +25,14 @@ class _ListagemProdutoState extends State<ListagemProduto> {
       child: const Column(
         children: [
           CardListagemProduto(
-            descricaoProduto: 'teste',
+            descricaoProduto: 'Coca-Cola 1L',
           ),
           Padding(
             padding: EdgeInsets.only(top: 15),
             child: CardDescritivoProduto(
-              preco: 1.2,
+              preco: 10.99,
               quantidade: 1,
-              total: 1.5,
+              total: 10.99,
             ),
           ),
         ],
