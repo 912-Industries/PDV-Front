@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pdv_front/screens/widgets/dialog_produto/dialog_produto.dart';
+import 'package:pdv_front/screens/widgets/keyboard_buffer/keyboard_shortcuts.dart';
 
 class KeyboardBuffer extends StatefulWidget {
   const KeyboardBuffer({Key? key}) : super(key: key);
@@ -14,7 +16,7 @@ class _KeyboardBufferState extends State<KeyboardBuffer> {
   @override
   void initState() {
     super.initState();
-    _focusNode.requestFocus(); // Requests focus for the widget
+    _focusNode.requestFocus();
   }
 
   @override
@@ -29,9 +31,15 @@ class _KeyboardBufferState extends State<KeyboardBuffer> {
       focusNode: _focusNode,
       onKey: (RawKeyEvent event) {
         if (event is RawKeyDownEvent) {
-          if (event.isControlPressed &&
-              event.logicalKey == LogicalKeyboardKey.keyD) {
-            print('Ctrl+D was pressed');
+          if (KeyboardShortcuts.isDoubleEnter(event)) {
+            print('double enter');
+          }
+          if (KeyboardShortcuts.isControlD(event)) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const DialogProduto())); // Navigate to DialogProduto
           }
         }
       },
