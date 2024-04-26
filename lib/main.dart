@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:pdv_front/screens/home_page.dart';
+import 'package:pdv_front/app/modules/home_page/home_page.dart';
+import 'package:pdv_front/app/modules/home_page/shared/deleteProductPresenter.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => Presenter()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

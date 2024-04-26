@@ -11,6 +11,12 @@ class KeyboardShortcuts {
         event.logicalKey == LogicalKeyboardKey.keyD;
   }
 
+  /// Hotkey para adicionar produto
+  static bool isControlA(RawKeyEvent event) {
+    return event.isControlPressed &&
+        event.logicalKey == LogicalKeyboardKey.keyA;
+  }
+
   /// Hotkey para Finalizar Operação
   static bool isDoubleEnter(RawKeyEvent event) {
     if (event.logicalKey != LogicalKeyboardKey.enter) {

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CardDescritivoProduto extends StatefulWidget {
+  final int id;
   final double preco;
   final int quantidade;
   final double total;
 
   const CardDescritivoProduto(
       {Key? key,
+      required this.id,
       required this.preco,
       required this.quantidade,
       required this.total})
@@ -32,6 +34,15 @@ class _CardDescritivoProdutoState extends State<CardDescritivoProduto> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
+              Column(
+                children: [
+                  const Text(
+                    'ID',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                  Text(widget.id.toString()),
+                ],
+              ),
               Column(
                 children: [
                   const Text(

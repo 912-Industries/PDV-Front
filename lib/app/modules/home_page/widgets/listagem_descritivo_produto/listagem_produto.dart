@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pdv_front/screens/widgets/listagem_descritivo_produto/card_descritivo_produto.dart';
-import 'package:pdv_front/screens/widgets/listagem_descritivo_produto/utils/card.dart';
+import 'package:pdv_front/app/modules/home_page/widgets/listagem_descritivo_produto/card_descritivo_produto.dart';
+import 'package:pdv_front/app/modules/home_page/widgets/listagem_descritivo_produto/utils/card.dart';
 
 class ListagemProduto extends StatefulWidget {
   const ListagemProduto({super.key});
@@ -30,6 +30,7 @@ class _ListagemProdutoState extends State<ListagemProduto> {
           Padding(
             padding: EdgeInsets.only(top: 15),
             child: CardDescritivoProduto(
+              id: 1,
               preco: 10.99,
               quantidade: 1,
               total: 10.99,

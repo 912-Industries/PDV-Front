@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pdv_front/screens/widgets/listagem_preco_produto/card_listagem_preco_produto.dart';
-import 'package:pdv_front/screens/widgets/listagem_preco_produto/card_preco_total.dart';
+import 'package:pdv_front/app/modules/home_page/widgets/listagem_preco_produto/card_listagem_preco_produto.dart';
+import 'package:pdv_front/app/modules/home_page/widgets/listagem_preco_produto/card_preco_total.dart';
 
 class ListagemPrecoProduto extends StatefulWidget {
   const ListagemPrecoProduto({super.key});
