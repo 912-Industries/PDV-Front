@@ -7,6 +7,7 @@ class KeyboardShortcuts {
 
   /// Hotkey para remover produto
   static bool isControlD(RawKeyEvent event) {
+    print('object');
     return event.isControlPressed &&
         event.logicalKey == LogicalKeyboardKey.keyD;
   }
@@ -20,6 +21,8 @@ class KeyboardShortcuts {
   /// Hotkey para Finalizar Operação
   static bool isDoubleEnter(RawKeyEvent event) {
     if (event.logicalKey != LogicalKeyboardKey.enter) {
+      print('double enter');
+
       enterPressCount = 0;
       return false;
     }
@@ -27,6 +30,7 @@ class KeyboardShortcuts {
     enterPressCount++;
     if (enterPressCount == 2) {
       enterPressCount = 0;
+      print('double enter');
       return true;
     }
     return false;

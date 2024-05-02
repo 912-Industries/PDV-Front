@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pdv_front/app/modules/home_page/widgets/dialog_produto/dialog_produto.dart';
 
 class Presenter with ChangeNotifier {
   final _products = <Map<String, dynamic>>[];
@@ -24,6 +25,19 @@ class Presenter with ChangeNotifier {
     } else {
       print('Produto não encontrado');
     }
+  }
+
+  void showConfirmationDialog(
+      BuildContext context, Map<String, dynamic> product) {
+    showDialog(
+      context: context,
+      builder: (context) => DialogProduto(
+        onConfirm: (id) {
+          removeProduct(id);
+          refresh();
+        },
+      ),
+    );
   }
 
   void refresh() {
