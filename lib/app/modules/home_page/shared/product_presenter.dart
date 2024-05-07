@@ -5,27 +5,28 @@ import 'package:pdv_front/services/home_page/adicao_produto.dart';
 class Presenter with ChangeNotifier {
   final _products = <Map<String, dynamic>>[];
 
-
   List<Map<String, dynamic>> get products => _products;
 
+  double _subtotal = 0.0;
+  double get subtotal => _subtotal;
+
   void addProduct(String productId) async {
-    print('Adicionando produto $productId');
     final produtoService = AdicaoProduto();
     final produto = await produtoService.fetchProdutoById(int.parse(productId));
     if (produto != null) {
       _products.add(produto);
+      _calculateSubtotal();
       notifyListeners();
-      print(products);
-    } else {
-    }
+    } 
   }
 
   void removeProduct(String productId) {
-    if (_products.any((product) => product['id_produto'] == int.parse(productId))) {
-      _products.removeWhere((product) => product['id_produto'] == int.parse(productId));
+    if (_products
+        .any((product) => product['id_produto'] == int.parse(productId))) {
+      _products.removeWhere(
+          (product) => product['id_produto'] == int.parse(productId));
+      _calculateSubtotal();
       notifyListeners();
-    } else {
-      print('Produto não encontrado');
     }
   }
 
@@ -52,6 +53,14 @@ class Presenter with ChangeNotifier {
         },
       ),
     );
+  }
+
+  void _calculateSubtotal() {
+    _subtotal = 0.0;
+    for (var product in _products) {
+      _subtotal += product[
+          'precoFinal_produto'];
+    }
   }
 
   void refresh() {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pdv_front/app/modules/home_page/shared/product_presenter.dart';
+import 'package:provider/provider.dart';
 
 class CardPrecoTotal extends StatefulWidget {
   const CardPrecoTotal({super.key});
@@ -10,17 +12,18 @@ class CardPrecoTotal extends StatefulWidget {
 class _CardPrecoTotalState extends State<CardPrecoTotal> {
   @override
   Widget build(BuildContext context) {
+    final presenter = Provider.of<Presenter>(context);
     return Container(
       width: MediaQuery.of(context).size.width * 0.36,
       height: 75,
       decoration: BoxDecoration(
           border: Border.all(width: 2, color: Colors.black),
           borderRadius: BorderRadius.circular(20)),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(left: 20, top: 5),
             child: Align(
               alignment: Alignment.topLeft,
@@ -34,12 +37,12 @@ class _CardPrecoTotalState extends State<CardPrecoTotal> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(right: 15, bottom: 5),
+            padding: const EdgeInsets.only(right: 15, bottom: 5),
             child: Align(
               alignment: Alignment.bottomRight,
               child: Text(
-                "10,99",
-                style: TextStyle(
+                presenter.subtotal.toStringAsFixed(2),
+                style: const TextStyle(
                     color: Colors.black,
                     fontSize: 20,
                     fontWeight: FontWeight.bold),

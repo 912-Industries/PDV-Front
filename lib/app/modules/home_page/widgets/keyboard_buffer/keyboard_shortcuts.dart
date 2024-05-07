@@ -20,13 +20,12 @@ class KeyboardShortcuts {
   /// Hotkey para Finalizar Operação
   static bool isDoubleEnter(RawKeyEvent event) {
     if (event.logicalKey != LogicalKeyboardKey.enter) {
-
       enterPressCount = 0;
       return false;
     }
 
     enterPressCount++;
-    if (enterPressCount == 2) {
+    if (enterPressCount >= 2) {
       enterPressCount = 0;
       return true;
     }

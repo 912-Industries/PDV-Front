@@ -39,6 +39,9 @@ class _KeyboardBufferState extends State<KeyboardBuffer> {
                       presenter.addProduct(id);
                     }));
           }
+          if (KeyboardShortcuts.isDoubleEnter(event)) {
+          /// TODO Adicionar comportamento
+          }
         },
         focusNode: widget.focusNode,
         child: const Text(''),
