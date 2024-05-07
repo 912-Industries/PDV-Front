@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pdv_front/app/modules/home_page/shared/deleteProductPresenter.dart';
+import 'package:pdv_front/app/modules/home_page/shared/product_presenter.dart';
 import 'package:pdv_front/app/modules/home_page/widgets/dialog_produto/dialog_produto.dart';
 import 'package:pdv_front/app/modules/home_page/widgets/keyboard_buffer/keyboard_shortcuts.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +31,13 @@ class _KeyboardBufferState extends State<KeyboardBuffer> {
                 },
               ),
             );
+          }
+          if (KeyboardShortcuts.isControlA(event)) {
+            showDialog(
+                context: context,
+                builder: (context) => DialogProduto(onConfirm: (id) {
+                      presenter.addProduct(id);
+                    }));
           }
         },
         focusNode: widget.focusNode,

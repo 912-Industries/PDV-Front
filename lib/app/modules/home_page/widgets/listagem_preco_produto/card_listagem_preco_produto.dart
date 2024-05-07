@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pdv_front/app/modules/home_page/shared/deleteProductPresenter.dart';
+import 'package:pdv_front/app/modules/home_page/shared/product_presenter.dart';
 import 'package:provider/provider.dart';
 
 class CardListagemPreco extends StatefulWidget {
@@ -32,7 +32,7 @@ class _CardListagemPrecoState extends State<CardListagemPreco> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'ID: ${presenter.products[index]['id']}\nProduto: ${presenter.products[index]['name']}\nPreço: ${presenter.products[index]['price']}',
+                    'ID: ${presenter.products[index]['id_produto']}\nProduto: ${presenter.products[index]['nome_produto']}\nPreço: ${presenter.products[index]['precoFinal_produto']}',
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 16,

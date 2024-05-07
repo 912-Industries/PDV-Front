@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pdv_front/app/modules/home_page/shared/deleteProductPresenter.dart';
+import 'package:pdv_front/app/modules/home_page/shared/product_presenter.dart';
 import 'package:pdv_front/app/modules/home_page/widgets/keyboard_buffer/keyboard_buffer.dart';
 import 'package:pdv_front/app/modules/home_page/widgets/listagem_descritivo_produto/listagem_produto.dart';
 import 'package:pdv_front/app/modules/home_page/widgets/listagem_preco_produto/listagem_preco_produto.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pdv_front/app/modules/home_page/home_page.dart';
-import 'package:pdv_front/app/modules/home_page/shared/deleteProductPresenter.dart';
+import 'package:pdv_front/app/modules/home_page/shared/product_presenter.dart';
 import 'package:provider/provider.dart';
 
 void main() {
