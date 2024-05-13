@@ -5,12 +5,9 @@ import 'package:pdv_front/services/home_page/adicao_produto.dart';
 
 class Presenter with ChangeNotifier {
   final _products = <Map<String, dynamic>>[];
-  final _productDescriptions = <String, String>{};
   final _notifier = ValueNotifier(0);
 
   List<Map<String, dynamic>> get products => _products;
-
-  Map<String, String> get productDescriptions => _productDescriptions;
 
   double _subtotal = 0.0;
   double get subtotal => _subtotal;
@@ -29,7 +26,7 @@ class Presenter with ChangeNotifier {
         .any((product) => product['id_produto'] == int.parse(productId))) {
       _products.removeWhere(
           (product) => product['id_produto'] == int.parse(productId));
-      _productDescriptions.remove(productId);
+      _products.remove(productId);
       _calculateSubtotal();
       _notifier.value++;
       notifyListeners();

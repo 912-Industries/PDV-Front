@@ -24,8 +24,17 @@ class _CardDescritivoProdutoState extends State<CardDescritivoProduto> {
   @override
   Widget build(BuildContext context) {
     final presenter = Provider.of<Presenter>(context);
-    double total =
-        presenter.products.last['precoFinal_produto'] * widget.quantidade;
+
+    String idProduto = presenter.products.isEmpty
+        ? ''
+        : presenter.products.last['id_produto'].toString();
+    String precoProduto = presenter.products.isEmpty
+        ? ''
+        : presenter.products.last['precoFinal_produto'].toString();
+    double total = presenter.products.isEmpty
+        ? 0
+        : presenter.products.last['precoFinal_produto'] * widget.quantidade;
+
     return Container(
       padding: const EdgeInsets.only(left: 50),
       width: MediaQuery.of(context).size.width * 1,
@@ -45,7 +54,7 @@ class _CardDescritivoProdutoState extends State<CardDescritivoProduto> {
                     'ID',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  Text(presenter.products.last['id_produto'].toString()),
+                  Text(idProduto),
                 ],
               ),
               Column(
@@ -54,8 +63,7 @@ class _CardDescritivoProdutoState extends State<CardDescritivoProduto> {
                     'Preço',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  Text(
-                      presenter.products.last['precoFinal_produto'].toString()),
+                  Text(precoProduto),
                 ],
               ),
               const Text('X'),
