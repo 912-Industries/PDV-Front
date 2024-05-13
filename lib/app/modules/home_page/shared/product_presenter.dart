@@ -1,11 +1,16 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pdv_front/app/modules/home_page/widgets/dialog_produto/dialog_produto.dart';
 import 'package:pdv_front/services/home_page/adicao_produto.dart';
 
 class Presenter with ChangeNotifier {
   final _products = <Map<String, dynamic>>[];
+  final _productDescriptions = <String, String>{};
+  final _notifier = ValueNotifier(0);
 
   List<Map<String, dynamic>> get products => _products;
+
+  Map<String, String> get productDescriptions => _productDescriptions;
 
   double _subtotal = 0.0;
   double get subtotal => _subtotal;
@@ -13,11 +18,10 @@ class Presenter with ChangeNotifier {
   void addProduct(String productId) async {
     final produtoService = AdicaoProduto();
     final produto = await produtoService.fetchProdutoById(int.parse(productId));
-    if (produto != null) {
-      _products.add(produto);
-      _calculateSubtotal();
-      notifyListeners();
-    } 
+    _products.add(produto);
+    _calculateSubtotal();
+    _notifier.value++;
+    notifyListeners();
   }
 
   void removeProduct(String productId) {
@@ -25,7 +29,9 @@ class Presenter with ChangeNotifier {
         .any((product) => product['id_produto'] == int.parse(productId))) {
       _products.removeWhere(
           (product) => product['id_produto'] == int.parse(productId));
+      _productDescriptions.remove(productId);
       _calculateSubtotal();
+      _notifier.value++;
       notifyListeners();
     }
   }
@@ -58,12 +64,19 @@ class Presenter with ChangeNotifier {
   void _calculateSubtotal() {
     _subtotal = 0.0;
     for (var product in _products) {
-      _subtotal += product[
-          'precoFinal_produto'];
+      _subtotal += product['precoFinal_produto'];
     }
   }
 
   void refresh() {
     notifyListeners();
   }
+
+  @override
+  void dispose() {
+    _notifier.dispose();
+    super.dispose();
+  }
+
+  ValueNotifier<int> get listenable => _notifier;
 }

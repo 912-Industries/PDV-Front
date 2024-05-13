@@ -10,7 +10,7 @@ class CardListagemProduto extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(left: 15),
-      width: MediaQuery.of(context).size.width * 1,
+      width: MediaQuery.of(context).size.width,
       height: 70,
       decoration: BoxDecoration(
           border: Border.all(width: 2, color: Colors.black),
