@@ -23,7 +23,6 @@ class _ListagemPrecoProdutoState extends State<ListagemPrecoProduto> {
         child: Column(
           children: <Widget>[
             CardListagemPreco(),
-            Spacer(),
             Padding(
               padding: EdgeInsets.only(top: 5.0),
               child: CardPrecoTotal(),

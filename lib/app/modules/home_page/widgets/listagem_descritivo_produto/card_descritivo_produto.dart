@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pdv_front/app/modules/home_page/shared/product_presenter.dart';
+import 'package:provider/provider.dart';
 
 class CardDescritivoProduto extends StatefulWidget {
   final int id;
@@ -21,6 +23,9 @@ class CardDescritivoProduto extends StatefulWidget {
 class _CardDescritivoProdutoState extends State<CardDescritivoProduto> {
   @override
   Widget build(BuildContext context) {
+    final presenter = Provider.of<Presenter>(context);
+    double total =
+        presenter.products.last['precoFinal_produto'] * widget.quantidade;
     return Container(
       padding: const EdgeInsets.only(left: 50),
       width: MediaQuery.of(context).size.width * 1,
@@ -40,7 +45,7 @@ class _CardDescritivoProdutoState extends State<CardDescritivoProduto> {
                     'ID',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  Text(widget.id.toString()),
+                  Text(presenter.products.last['id_produto'].toString()),
                 ],
               ),
               Column(
@@ -49,7 +54,8 @@ class _CardDescritivoProdutoState extends State<CardDescritivoProduto> {
                     'Preço',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  Text(widget.preco.toString()),
+                  Text(
+                      presenter.products.last['precoFinal_produto'].toString()),
                 ],
               ),
               const Text('X'),
@@ -69,7 +75,7 @@ class _CardDescritivoProdutoState extends State<CardDescritivoProduto> {
                     'Total',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  Text(widget.total.toString()),
+                  Text(total.toString()),
                 ],
               ),
             ],
