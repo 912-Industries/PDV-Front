@@ -6,7 +6,7 @@ class CardDescritivoProduto extends StatefulWidget {
   final int id;
   final double preco;
   final int quantidade;
-  final double total;
+  final num total;
 
   const CardDescritivoProduto(
       {Key? key,
@@ -25,15 +25,10 @@ class _CardDescritivoProdutoState extends State<CardDescritivoProduto> {
   Widget build(BuildContext context) {
     final presenter = Provider.of<Presenter>(context);
 
-    String idProduto = presenter.products.isEmpty
-        ? ''
-        : presenter.products.last['id_produto'].toString();
-    String precoProduto = presenter.products.isEmpty
-        ? ''
-        : presenter.products.last['precoFinal_produto'].toString();
-    double total = presenter.products.isEmpty
-        ? 0
-        : presenter.products.last['precoFinal_produto'] * widget.quantidade;
+    num total = presenter.products.isEmpty
+        ? 0.0
+        : presenter.products.last['precoFinal_produto'] *
+            presenter.lastAddedProductQuantity;
 
     return Container(
       padding: const EdgeInsets.only(left: 50),
@@ -54,7 +49,9 @@ class _CardDescritivoProdutoState extends State<CardDescritivoProduto> {
                     'ID',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  Text(idProduto),
+                  Text(presenter.products.isNotEmpty
+                      ? presenter.lastAddedProductId.toString()
+                      : ''),
                 ],
               ),
               Column(
@@ -63,7 +60,9 @@ class _CardDescritivoProdutoState extends State<CardDescritivoProduto> {
                     'Preço',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  Text(precoProduto),
+                  Text(presenter.products.isNotEmpty
+                      ? presenter.lastAddedProductPrice.toString()
+                      : ''),
                 ],
               ),
               const Text('X'),
@@ -73,7 +72,9 @@ class _CardDescritivoProdutoState extends State<CardDescritivoProduto> {
                     'Quantidade',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  Text(widget.quantidade.toString()),
+                  Text(presenter.products.isNotEmpty
+                      ? presenter.lastAddedProductQuantity.toString()
+                      : ''),
                 ],
               ),
               const Text('='),
@@ -83,7 +84,7 @@ class _CardDescritivoProdutoState extends State<CardDescritivoProduto> {
                     'Total',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  Text(total.toString()),
+                  Text(presenter.products.isNotEmpty ? total.toString() : ''),
                 ],
               ),
             ],

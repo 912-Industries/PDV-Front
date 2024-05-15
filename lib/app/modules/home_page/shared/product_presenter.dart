@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pdv_front/app/modules/home_page/widgets/dialog_produto/dialog_produto.dart';
 import 'package:pdv_front/services/home_page/adicao_produto.dart';
@@ -8,14 +7,31 @@ class Presenter with ChangeNotifier {
   final _notifier = ValueNotifier(0);
 
   List<Map<String, dynamic>> get products => _products;
+  late Map<String, dynamic> _lastAddedProduct;
 
   double _subtotal = 0.0;
   double get subtotal => _subtotal;
+  int get lastAddedProductQuantity => _lastAddedProduct['quantidade'] ?? '0';
+  int get lastAddedProductId => _lastAddedProduct['id_produto'] ?? '0';
+  num get lastAddedProductPrice => _lastAddedProduct['precoFinal_produto'] ?? '0';
 
   void addProduct(String productId) async {
     final produtoService = AdicaoProduto();
     final produto = await produtoService.fetchProdutoById(int.parse(productId));
-    _products.add(produto);
+    final existingProduct = _products.firstWhere(
+        (p) => p['id_produto'] == produto['id_produto'] && p['quantidade'] > 0,
+        orElse: () => {});
+
+    if (existingProduct.isNotEmpty) {
+      existingProduct['quantidade'] = (existingProduct['quantidade'] ?? 0) + 1;
+      print(_products);
+    } else {
+      produto['quantidade'] = 1;
+      _products.add(produto);
+    }
+
+    _lastAddedProduct = existingProduct.isNotEmpty ? existingProduct : produto;
+
     _calculateSubtotal();
     _notifier.value++;
     notifyListeners();
