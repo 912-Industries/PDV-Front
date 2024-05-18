@@ -11,6 +11,13 @@ class CardPrecoTotal extends StatefulWidget {
 
 class _CardPrecoTotalState extends State<CardPrecoTotal> {
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final presenter = Provider.of<Presenter>(context, listen: false);
+    presenter.calculateSubtotal();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final presenter = Provider.of<Presenter>(context);
     return Container(
@@ -30,7 +37,7 @@ class _CardPrecoTotalState extends State<CardPrecoTotal> {
               child: Text(
                 "Subtotal",
                 style: TextStyle(
-                    color: Colors.black,
+                    color: Color.fromARGB(255, 100, 27, 27),
                     fontSize: 12,
                     fontWeight: FontWeight.bold),
               ),

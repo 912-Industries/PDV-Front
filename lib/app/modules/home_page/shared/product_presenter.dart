@@ -1,3 +1,4 @@
+// presenter.dart
 import 'package:flutter/material.dart';
 import 'package:pdv_front/app/modules/home_page/widgets/dialog_produto/dialog_produto.dart';
 import 'package:pdv_front/services/home_page/adicao_produto.dart';
@@ -13,7 +14,8 @@ class Presenter with ChangeNotifier {
   double get subtotal => _subtotal;
   int get lastAddedProductQuantity => _lastAddedProduct['quantidade'] ?? '0';
   int get lastAddedProductId => _lastAddedProduct['id_produto'] ?? '0';
-  num get lastAddedProductPrice => _lastAddedProduct['precoFinal_produto'] ?? '0';
+  num get lastAddedProductPrice =>
+      _lastAddedProduct['precoFinal_produto'] ?? '0';
 
   void addProduct(String productId) async {
     final produtoService = AdicaoProduto();
@@ -32,7 +34,7 @@ class Presenter with ChangeNotifier {
 
     _lastAddedProduct = existingProduct.isNotEmpty ? existingProduct : produto;
 
-    _calculateSubtotal();
+    _calculateSubtotalIndividual();
     _notifier.value++;
     notifyListeners();
   }
@@ -43,7 +45,7 @@ class Presenter with ChangeNotifier {
       _products.removeWhere(
           (product) => product['id_produto'] == int.parse(productId));
       _products.remove(productId);
-      _calculateSubtotal();
+      _calculateSubtotalIndividual();
       _notifier.value++;
       notifyListeners();
     }
@@ -74,11 +76,19 @@ class Presenter with ChangeNotifier {
     );
   }
 
-  void _calculateSubtotal() {
+  void _calculateSubtotalIndividual() {
     _subtotal = 0.0;
     for (var product in _products) {
       _subtotal += product['precoFinal_produto'];
     }
+  }
+
+  void calculateSubtotal() {
+    _subtotal = 0.0;
+    for (var product in _products) {
+      _subtotal += product['precoFinal_produto'] * product['quantidade'];
+    }
+    notifyListeners(); // Notificar os listeners do presenter
   }
 
   void refresh() {
