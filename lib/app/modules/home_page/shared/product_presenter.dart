@@ -11,11 +11,14 @@ class Presenter with ChangeNotifier {
   late Map<String, dynamic> _lastAddedProduct;
 
   double _subtotal = 0.0;
+  String _productDescription = '';
+
   double get subtotal => _subtotal;
   int get lastAddedProductQuantity => _lastAddedProduct['quantidade'] ?? '0';
   int get lastAddedProductId => _lastAddedProduct['id_produto'] ?? '0';
   num get lastAddedProductPrice =>
       _lastAddedProduct['precoFinal_produto'] ?? '0';
+  String get productDescription => _productDescription;
 
   void addProduct(String productId) async {
     final produtoService = AdicaoProduto();
@@ -26,7 +29,7 @@ class Presenter with ChangeNotifier {
 
     if (existingProduct.isNotEmpty) {
       existingProduct['quantidade'] = (existingProduct['quantidade'] ?? 0) + 1;
-      print(_products);
+      updateProductDescription();
     } else {
       produto['quantidade'] = 1;
       _products.add(produto);
@@ -35,7 +38,17 @@ class Presenter with ChangeNotifier {
     _lastAddedProduct = existingProduct.isNotEmpty ? existingProduct : produto;
 
     _calculateSubtotalIndividual();
+    calculateSubtotal();
     _notifier.value++;
+    notifyListeners();
+  }
+
+  void updateProductDescription() {
+    if (_products.isNotEmpty) {
+      _productDescription = _products.last['nome_produto'];
+    } else {
+      _productDescription = '';
+    }
     notifyListeners();
   }
 
@@ -46,6 +59,8 @@ class Presenter with ChangeNotifier {
           (product) => product['id_produto'] == int.parse(productId));
       _products.remove(productId);
       _calculateSubtotalIndividual();
+      updateProductDescription();
+      calculateSubtotal();
       _notifier.value++;
       notifyListeners();
     }
