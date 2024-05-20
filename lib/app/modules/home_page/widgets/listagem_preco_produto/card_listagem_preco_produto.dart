@@ -22,7 +22,7 @@ class _CardListagemPrecoState extends State<CardListagemPreco> {
             child: Container(
               padding: const EdgeInsets.all(15),
               width: double.infinity,
-              height: 105,
+              height: 140,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.black, width: 2),
                 borderRadius: BorderRadius.circular(20),
@@ -32,7 +32,7 @@ class _CardListagemPrecoState extends State<CardListagemPreco> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'ID: ${presenter.products[index]['id_produto']}\nProduto: ${presenter.products[index]['nome_produto']}\nPreço: ${presenter.products[index]['precoFinal_produto']}',
+                    'ID: ${presenter.products[index]['id_produto']}\nProduto: ${presenter.products[index]['nome_produto']}\nPreço: ${presenter.products[index]['precoFinal_produto']}\nQuantidade: ${presenter.products[index]['quantidade']}',
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 16,

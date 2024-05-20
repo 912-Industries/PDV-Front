@@ -53,16 +53,24 @@ class Presenter with ChangeNotifier {
   }
 
   void removeProduct(String productId) {
-    if (_products
-        .any((product) => product['id_produto'] == int.parse(productId))) {
-      _products.removeWhere(
-          (product) => product['id_produto'] == int.parse(productId));
-      _products.remove(productId);
-      _calculateSubtotalIndividual();
-      updateProductDescription();
-      calculateSubtotal();
-      _notifier.value++;
-      notifyListeners();
+    final productToRemove = _products.firstWhere(
+      (product) => product['id_produto'] == int.parse(productId),
+      orElse: () => {},
+    );
+
+    _updateProductQuantity(productToRemove, -1);
+    _calculateSubtotalIndividual();
+    updateProductDescription();
+    calculateSubtotal();
+    _notifier.value++;
+    notifyListeners();
+  }
+
+  void _updateProductQuantity(Map<String, dynamic> product, int quantityDelta) {
+    if (product['quantidade'] + quantityDelta > 0) {
+      product['quantidade'] += quantityDelta;
+    } else {
+      _products.removeWhere((p) => p['id_produto'] == product['id_produto']);
     }
   }
 
