@@ -1,7 +1,9 @@
 // presenter.dart
 import 'package:flutter/material.dart';
-import 'package:pdv_front/app/modules/home_page/widgets/dialog_produto/dialog_produto.dart';
+import 'package:pdv_front/app/modules/home_page/widgets/dialog/dialog_fechamento.dart';
+import 'package:pdv_front/app/modules/home_page/widgets/dialog/dialog_produto.dart';
 import 'package:pdv_front/services/home_page/adicao_produto.dart';
+import 'package:pdv_front/services/home_page/finalizar_compra.dart';
 
 class Presenter with ChangeNotifier {
   final _products = <Map<String, dynamic>>[];
@@ -94,6 +96,19 @@ class Presenter with ChangeNotifier {
       builder: (context) => DialogProduto(
         onConfirm: (id) {
           addProduct(id);
+        },
+      ),
+    );
+  }
+
+  void showFechamentoDialog(
+      BuildContext context, List<Map<String, dynamic>> products) {
+    showDialog(
+      context: context,
+      builder: (context) => DialogFinalizarCompra(
+        produtos: products,
+        onConfirm: (produtos) async {
+          FinalizarCompraService().finalizarCompra(produtos);
         },
       ),
     );
