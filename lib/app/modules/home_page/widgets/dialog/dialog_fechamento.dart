@@ -15,12 +15,23 @@ class DialogFinalizarCompra extends StatefulWidget {
 class _DialogFinalizarCompraState extends State<DialogFinalizarCompra> {
   @override
   Widget build(BuildContext context) {
-    return const AlertDialog(
-      title: Text('Finalizar Compra'),
-      content: Text('Deseja finalizar a compra?'),
+    return AlertDialog(
+      title: const Text('Finalizar Compra'),
+      content: const Text('Deseja finalizar a compra?'),
       actions: [
-        Text('Cancelar'),
-        Text('Confirmar'),
+        TextButton(
+          child: const Text('Cancelar'),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        TextButton(
+          child: const Text('Confirmar'),
+          onPressed: () {
+            widget.onConfirm(widget.produtos);
+            Navigator.pop(context);
+          },
+        ),
       ],
     );
   }

@@ -39,7 +39,7 @@ class _KeyboardBufferState extends State<KeyboardBuffer> {
                       presenter.addProduct(id);
                     }));
           }
-          if (KeyboardShortcuts.isDoubleEnter(event)) {
+          if (KeyboardShortcuts.isControlEnter(event)) {
             presenter.showFechamentoDialog(context, presenter.products);
           }
         },
