@@ -31,6 +31,7 @@ class Presenter with ChangeNotifier {
 
     if (existingProduct.isNotEmpty) {
       existingProduct['quantidade'] = (existingProduct['quantidade'] ?? 0) + 1;
+      print(_lastAddedProduct);
       updateProductDescription();
     } else {
       produto['quantidade'] = 1;

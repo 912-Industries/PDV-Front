@@ -4,18 +4,23 @@ import 'package:http/http.dart' as http;
 
 class FinalizarCompraService {
   Future<void> finalizarCompra(List<Map<String, dynamic>> produtos) async {
+    final produtosParaEnviar = produtos.map((produto) {
+      return {"id_produto": produto["id"], "quantidade": produto["quantidade"]};
+    }).toList();
+
     final response = await http.post(
-      Uri.parse('https://seu-backend.com/remover-produtos'),
+      Uri.parse('http://localhost:8080/api/produto/finalizar-compra'),
       headers: {
         'Content-Type': 'application/json',
       },
-      body: jsonEncode(produtos),
+      body: jsonEncode(produtosParaEnviar),
     );
 
     if (response.statusCode == 200) {
-      // Remoção realizada com sucesso
+      // Sucesso! A compra foi finalizada com sucesso.
+      print('Compra finalizada com sucesso!');
     } else {
-      // Erro ao remover produtos
+      print('Erro desconhecido. Código de status: ${response.statusCode}');
     }
   }
 }
