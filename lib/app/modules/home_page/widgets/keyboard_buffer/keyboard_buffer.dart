@@ -27,7 +27,7 @@ class _KeyboardBufferState extends State<KeyboardBuffer> {
               context: context,
               builder: (context) => DialogProduto(
                 onConfirm: (id) {
-                  presenter.removeProduct(id);
+                  presenter.removeProduct(context, id);
                 },
               ),
             );
@@ -36,7 +36,7 @@ class _KeyboardBufferState extends State<KeyboardBuffer> {
             showDialog(
                 context: context,
                 builder: (context) => DialogProduto(onConfirm: (id) {
-                      presenter.addProduct(id);
+                      presenter.addProduct(context, id);
                     }));
           }
           if (KeyboardShortcuts.isControlEnter(event)) {

@@ -1,4 +1,5 @@
 // presenter.dart
+import 'package:elegant_notification/elegant_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:pdv_front/app/modules/home_page/widgets/dialog/dialog_fechamento.dart';
 import 'package:pdv_front/app/modules/home_page/widgets/dialog/dialog_produto.dart';
@@ -22,28 +23,36 @@ class Presenter with ChangeNotifier {
       _lastAddedProduct['precoFinal_produto'] ?? '0';
   String get productDescription => _productDescription;
 
-  void addProduct(String productId) async {
-    final produtoService = AdicaoProduto();
-    final produto = await produtoService.fetchProdutoById(int.parse(productId));
-    final existingProduct = _products.firstWhere(
-        (p) => p['id_produto'] == produto['id_produto'] && p['quantidade'] > 0,
-        orElse: () => {});
+  void addProduct(BuildContext context, String productId) async {
+    try {
+      final produtoService = AdicaoProduto();
+      final produto =
+          await produtoService.fetchProdutoById(int.parse(productId));
+      final existingProduct = _products.firstWhere(
+          (p) =>
+              p['id_produto'] == produto['id_produto'] && p['quantidade'] > 0,
+          orElse: () => {});
 
-    if (existingProduct.isNotEmpty) {
-      existingProduct['quantidade'] = (existingProduct['quantidade'] ?? 0) + 1;
-      print(_lastAddedProduct);
-      updateProductDescription();
-    } else {
-      produto['quantidade'] = 1;
-      _products.add(produto);
+      if (existingProduct.isNotEmpty) {
+        existingProduct['quantidade'] =
+            (existingProduct['quantidade'] ?? 0) + 1;
+        updateProductDescription();
+      } else {
+        produto['quantidade'] = 1;
+        _products.add(produto);
+      }
+
+      _lastAddedProduct =
+          existingProduct.isNotEmpty ? existingProduct : produto;
+
+      _calculateSubtotalIndividual();
+      calculateSubtotal();
+      _notifier.value++;
+      notifyListeners();
+    } catch (e) {
+      showError(context, productId, 'Passagem de Produto',
+          'O produto de id: $productId não pode ser passadp validar se o produto está cadastrado');
     }
-
-    _lastAddedProduct = existingProduct.isNotEmpty ? existingProduct : produto;
-
-    _calculateSubtotalIndividual();
-    calculateSubtotal();
-    _notifier.value++;
-    notifyListeners();
   }
 
   void updateProductDescription() {
@@ -55,18 +64,23 @@ class Presenter with ChangeNotifier {
     notifyListeners();
   }
 
-  void removeProduct(String productId) {
-    final productToRemove = _products.firstWhere(
-      (product) => product['id_produto'] == int.parse(productId),
-      orElse: () => {},
-    );
+  void removeProduct(BuildContext context, String productId) {
+    try {
+      final productToRemove = _products.firstWhere(
+        (product) => product['id_produto'] == int.parse(productId),
+        orElse: () => {},
+      );
 
-    _updateProductQuantity(productToRemove, -1);
-    _calculateSubtotalIndividual();
-    updateProductDescription();
-    calculateSubtotal();
-    _notifier.value++;
-    notifyListeners();
+      _updateProductQuantity(productToRemove, -1);
+      _calculateSubtotalIndividual();
+      updateProductDescription();
+      calculateSubtotal();
+      _notifier.value++;
+      notifyListeners();
+    } catch (e) {
+      showError(context, productId, 'Cancelamento Produto',
+          'O produto de id: $productId não pode ser cancelado  validar se o produto foi passado ou cadastrado');
+    }
   }
 
   void _updateProductQuantity(Map<String, dynamic> product, int quantityDelta) {
@@ -83,7 +97,7 @@ class Presenter with ChangeNotifier {
       context: context,
       builder: (context) => DialogProduto(
         onConfirm: (id) {
-          removeProduct(id);
+          removeProduct(context, id);
           refresh();
         },
       ),
@@ -96,7 +110,7 @@ class Presenter with ChangeNotifier {
       context: context,
       builder: (context) => DialogProduto(
         onConfirm: (id) {
-          addProduct(id);
+          addProduct(context, id);
         },
       ),
     );
@@ -109,7 +123,9 @@ class Presenter with ChangeNotifier {
       builder: (context) => DialogFinalizarCompra(
         produtos: products,
         onConfirm: (produtos) async {
-          FinalizarCompraService().finalizarCompra(produtos);
+          FinalizarCompraService().finalizarCompra(context, produtos);
+          products.clear();
+          notifyListeners();
         },
       ),
     );
@@ -138,6 +154,14 @@ class Presenter with ChangeNotifier {
   void dispose() {
     _notifier.dispose();
     super.dispose();
+  }
+
+  void showError(BuildContext context, String? id, String title, String desc) {
+    ElegantNotification.error(
+      width: 800,
+      title: Text(title),
+      description: Text(desc),
+    ).show(context);
   }
 
   ValueNotifier<int> get listenable => _notifier;
